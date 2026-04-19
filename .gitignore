@@ -1,0 +1,26 @@
+# Environments & Security
+venv/
+.env
+
+# Python Built-ins
+__pycache__/
+*.py[cod]
+*.so
+
+# Model Checkpoints (Massive .pt / .pth files)
+checkpoint/
+
+# Local Testing Data
+archive/
+discoveries/
+
+# OS & Editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Gemini specific files
+GEMINI.md
+.gemini/
+security_review.md
