@@ -57,9 +57,9 @@ Due to the immense size of the SAM-2 neural network, your environment must be st
 
 ### Option 1: The Frictionless Cloud (Google Colab)
 For photographers lacking massive local GPU hardware, we have decoupled execution natively to the cloud.
-1. Upload your target `.DNG`/images to Google Drive.
-2. Open the included `UrbanAlchemy.ipynb` file in [Google Colab](https://colab.research.google.com/).
-3. Follow the instructions to drop your API key inside and hit **Run All**.
+1. Open the included `UrbanAlchemy.ipynb` file in [Google Colab](https://colab.research.google.com/).
+2. Hit **Run All**. The engine will default to analyzing the included `demo_dataset/` directory, processing two high-fidelity street photography masterpieces without you needing to authenticate anything!
+3. **Analyze your own photos:** To map your own massive `.DNG` directory natively, securely paste your Gemini key in the variables, uncomment the Google Drive cell, and point `TARGET_DIRECTORY` to your catalog folder!
 
 ### Option 2: Turnkey Execution (Docker)
 The easiest way to run the pipeline offline dynamically, shielding MacOS from OS conflicts.
