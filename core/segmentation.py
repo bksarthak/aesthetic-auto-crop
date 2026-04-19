@@ -65,23 +65,24 @@ def generate_masks(proxy_rgb: np.ndarray, point_coords: list[tuple]) -> list[tup
     # Map image to VRAM
     predictor.set_image(proxy_rgb)
     
-    input_points = np.array(point_coords)
-    input_labels = np.ones(len(input_points))  # 1 = foreground point
-    
-    masks, scores, _ = predictor.predict(
-        point_coords=input_points,
-        point_labels=input_labels,
-        multimask_output=True,
-    )
-    
     bboxes = []
     height, width = proxy_rgb.shape[:2]
     total_area = height * width
         
-    for i, mask_set in enumerate(masks):
+    # Generate a distinct mask for each salient point individually to prevent shape collapse
+    for x, y in point_coords:
+        pts = np.array([[x, y]])
+        lbls = np.array([1])
+        
+        masks, scores, _ = predictor.predict(
+            point_coords=pts,
+            point_labels=lbls,
+            multimask_output=True,
+        )
+        
         # Extract the highest confidence mask from the multimask outputs
-        best_idx = np.argmax(scores[i])
-        best_mask = mask_set[best_idx]
+        best_idx = np.argmax(scores)
+        best_mask = masks[best_idx]
         
         y_indices, x_indices = np.where(best_mask > 0)
         if len(x_indices) == 0:
